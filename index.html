@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- <meta name="description" content="8 bit computer project" /> -->
+        <title>343</title>
+        <link rel="stylesheet" href="styles/styles.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Silkscreen" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Red Hat Mono" />
+    </head>
+    <body>
+        <header>
+            <h1 id="banner">>:_ 8 bit computer from scratch_</h1>
+        </header>
+        <main>
+            <article class="post">
+                <h2>Intro</h2>
+                <p>Hello all, this webpage will showcase an 8 bit computer build that I'm currently working on with my son.
+                This project follows the series by Ben Eater where he works through building the various subsystems needed as separate
+                components in the von Neuman architecture model. It will eventually be a fully functional computer that can be programmed
+                in assembly language and add things! (although the assembly will have to be translated by hand to machine code). Here is an
+                example of what the final product should look like:
+                </p>
+                <div class="img-div">
+                    <img class="image" src="Images\8bitCpuExample.png" alt="Completed 8 bit cpu">
+                    <figcaption id="img-caption">Ben Eaters completed <a href="https://eater.net/8bit">8 bit</a> computer.</figcaption>
+                </div>
+                <p>Ours won't look exactly like this one above, but pretty close. </p>
+            </article>
+            <article class="post">
+                <h2>First Up: CPU Clock Module</h2>
+                <p>A computer operates on clock cycles. The various components all do something (or nothing) with each cycle of the clock. 
+                    The clock cycle is what signals to the CPU to load an instruction, execute an instruction, increment a program counter, 
+                    or do nothing for a cycle. Modern computers operate in the gigahertz range, which means <i>B</i>illions of cycles per second. 
+                    The module we're building doesn't need to be as fast. The chip that we'll be working with most is the 555 timer and it will 
+                    allow us to generate clock pulses in different modes.
+                </p>
+            </article>
+            <article class="post">
+                <h2>Clock Module Day 1: The 555 timer in astable mode</h2>
+                <p>
+                    Today we built a circuit that puts one 555 timer into astable mode which makes it a square waveform generator. What this means 
+                    is that we get a constant clock pulse at a predictable interval. Kind of like a watch ticking. The timing of the period and the 
+                    duty cycle is controlled by a capacitor and a variable resistor, i.e, the length of time the LED is on and off is controlled by 
+                    how much charge is held in the capacitor and how much resistance is applied to the flow of electrons. Being able to alter this is 
+                    what will allow us to control how fast the computer runs through its set of instructions. The instructions called for a 1MOhm variable 
+                    resistor and 2.2 nano farad capacitor. I didn't have the resistor on hand but I did have a 10KOhm, so we used that with a 100nf capacitor 
+                    to stretch the duty cycle just to test things for now. Those parts will be replaced when they come in the mail. 
+                </p>
+                <div class="img-div">
+                    <img class="image" src="Images\555TimerAstable.png" alt="555 Timer in Astable Mode">
+                </div>
+            </article>
+            <article class="post">
+                <h2>Clock Module Day 2: The 555 timer in monostable mode</h2>
+                <p>
+                    At certain times, we will want to be able to move a program forward one step at a time and pause. This allows us to examine the 
+                    computers state at any given point in a program and we can examine what happens from one state to the next. This is useful in 
+                    debugging so we can figure out why a program isn't giving us the expected result. To make this happen, we added a second 555 timer 
+                    to our clock module and set it into monostable mode. In this mode each pulse of the clock is controlled by a button that applies 
+                    voltage to the 555 trigger pin when pressed. This means that the program doesn't advance and holds whatever state it's in until the 
+                    button is pressed.
+                </p>
+                <div class="img-div">
+                    <img class="image" src="Images\555TimerMonostable.png" alt="555 Timer in monostable Mode">
+                </div>
+                <p>
+                    You may have also noticed that the breadboard is bigger. Well, that is becuase Knox wanted to use the little breadboard last time. So 
+                    after the last step was finished I moved everything over to a new breadboard to make room for the next few steps. Of course after that was 
+                    done, he wanted a 555 timer that he could play with in the exact same configuration on the little breadboard. So I ended up building 
+                    the astable timer for a third time on the board that I had just moved it off of.
+                </p>
+            </article>
+            <article class="post">
+                <h2>Clock Module Day 3: The 555 timer in bistable mode</h2>
+                <p>
+                    The last two posts were about building clock modes that allow us to advance a program in two different ways. The CPU can't run in both
+                    modes at the same time, so both timer circuits can't be allowed to output pulses simultaniously. We need a way to switch between modes.
+                    There's actually a few ways to do this but following along with Ben Eater's series lets us use the 555 timer again in its third mode: 
+                    bistable. Bistable essentially means that the output is stable to two modes: stabe on / stable off, or stable output A / stable outputB
+                    ...etc. This is perfect because we want this bistable circuit to throughput the pulse from either the astable circuit, or the monostable 
+                    circuit but not both. Our bistable circuit is the chip and LED located at the bottom. I didn't have a push button switch like in the 
+                    instructions, but I did have a two way switch on hand that I pilfered from some other parts box. This should be fine becuase we're using 
+                    the SR latch in the 555 timer so the output should stay latched until the switch is completely moved in either direction.
+                </p>
+                <div class="img-div">
+                    <img class="image" src="Images\555TimerBistable.png" alt="555 Timer in bistable Mode">
+                </div>
+                <p>
+                    On another note, our set of proper variable resistors arrived so we switched the 10KOhm with a 1MOhm and changed the 100nf capacitor to a 
+                    2.2nf capacitor. Now we can get same clock frequency range as Ben Eater gets in his videos.
+                </p>
+            </article>
+        </main>
+    </body>
+</html>
