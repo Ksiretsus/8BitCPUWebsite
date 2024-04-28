@@ -38,7 +38,7 @@
                 </p>
             </article>
             <article class="post">
-                <h2>Clock Module Day 1: The 555 timer in astable mode</h2>
+                <h2>Clock Module Part 1: The 555 timer in astable mode</h2>
                 <p>
                     Today we built a circuit that puts one 555 timer into astable mode which makes it a square waveform generator. What this means 
                     is that we get a constant clock pulse at a predictable interval. Kind of like a watch ticking. The timing of the period and the 
@@ -51,9 +51,23 @@
                 <div class="img-div">
                     <img class="image" src="Images\555TimerAstable.png" alt="555 Timer in Astable Mode">
                 </div>
+                <p>It's pretty neat how this works. The 555 timer output being on or off depends on the voltage of the capacitor and the capacitor charges
+                    and discharges depending on the state of the 555 timers S/R latch. When the capacitor is below 1.67v the S/R latch is 'set' the red LED 
+                    lights up and current is allowed to flow into the capacitor. When the capacitor charge exceeds 3.3v the S/R latch resets, turning the
+                    red LED off and discharges the capacitor. Once voltage sinks back below 1.67v the S/R latch sets, starting the process over again. With 
+                    variable resistor controlling current flow in and out of the capacitor, we can now control how fast the capacitor charges and discharges
+                    and that means that means we can control the frequency of the output. In the video below I turn the resistor knob to demo the change in 
+                    output speed.
+
+                </p>
+                <div class="img-div">
+                    <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    src="https://www.youtube.com/embed/URd2cT25hqg?autoplay=0&origin=http://example.com"
+                    frameborder="0"></iframe>
+                </div>
             </article>
             <article class="post">
-                <h2>Clock Module Day 2: The 555 timer in monostable mode</h2>
+                <h2>Clock Module Part 2: The 555 timer in monostable mode</h2>
                 <p>
                     At certain times, we will want to be able to move a program forward one step at a time and pause. This allows us to examine the 
                     computers state at any given point in a program and we can examine what happens from one state to the next. This is useful in 
@@ -66,6 +80,18 @@
                     <img class="image" src="Images\555TimerMonostable.png" alt="555 Timer in monostable Mode">
                 </div>
                 <p>
+                    In monostable mode the 555 output also depends on the voltage of the capacitor. In the base state in this configuration the capacitor
+                    is uncharged and the 555 output is off, nothing happens until the button is pressed. When the button is pressed, the S/R latch is set
+                    causing the output to be on, and the capacitor to charge. When the capacitor exceeds 3.3v then the S/R latch reset is triggered, causing
+                    the output to turn off, and the capacitor to discharge. Nothing happens again until the button is pressed. This basically allows for the
+                    output to be on for a small amout of time and then turn off again automatically, which means one clock pulse per button press.
+                </p>
+                <div class="img-div">
+                    <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    src="https://www.youtube.com/embed/2ksVKgO33T4?autoplay=0&origin=http://example.com"
+                    frameborder="0"></iframe>
+                </div>
+                <p>
                     You may have also noticed that the breadboard is bigger. Well, that is becuase Knox wanted to use the little breadboard last time. So 
                     after the last step was finished I moved everything over to a new breadboard to make room for the next few steps. Of course after that was 
                     done, he wanted a 555 timer that he could play with in the exact same configuration on the little breadboard. So I ended up building 
@@ -73,7 +99,7 @@
                 </p>
             </article>
             <article class="post">
-                <h2>Clock Module Day 3: The 555 timer in bistable mode</h2>
+                <h2>Clock Module Part 3: The 555 timer in bistable mode</h2>
                 <p>
                     The last two posts were about building clock modes that allow us to advance a program in two different ways. The CPU can't run in both
                     modes at the same time, so both timer circuits can't be allowed to output pulses simultaniously. We need a way to switch between modes.
@@ -87,10 +113,39 @@
                 <div class="img-div">
                     <img class="image" src="Images\555TimerBistable.png" alt="555 Timer in bistable Mode">
                 </div>
+                <div class="img-div">
+                    <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    src="https://www.youtube.com/embed/ruW8MbmsoM0?autoplay=0&origin=http://example.com"
+                    frameborder="0"></iframe>
+                </div>
                 <p>
                     On another note, our set of proper variable resistors arrived so we switched the 10KOhm with a 1MOhm and changed the 100nf capacitor to a 
                     2.2nf capacitor. Now we can get same clock frequency range as Ben Eater gets in his videos.
                 </p>
+            </article>
+            <article class="post">
+                <h2>Clock Module Part 4: Clock Logic</h2>
+                <p>
+                    In the clock module so far we have two possible clock pulses to send out: a constant intermittent pulse, and an on-demand single pulse.
+                    For the clock to be complete, we needed a way to have both clock pulses linked to the same output, but only allow one or the other to be
+                    providing the final output at any given time. The way to to do this was to use AND gates, OR gates, and NOT gates to build logic to
+                    provide the output while also preventing overlap. The integrated circuits used in this section were the 74LS04 (NOT gates),
+                    74LS08 (AND gates), and the 74LS32 (OR gates). It was really difficult to try and get all three chip ID's visible in one picture, but
+                    each can be seen in the shot below.
+                </p>
+                <div class="img-div">
+                    <img class="image" src="Images\ClockLogicCloseUp.png" alt="Clock logic">
+                </div>
+                <p>
+                    The completed clock module is below. Red led is the astable output indicator, left yellow led indicates monostable output.
+                    the right yellow LED indicates the status of the bistable switch: on is astable out, and off is monostable out. The blue 
+                    led shows the final clock output to the rest of the system.
+                </p>
+                <div class="img-div">
+                    <iframe id="ytplayer" type="text/html" width="640" height="360"
+                    src="https://www.youtube.com/embed/SYVy0clZCuk?autoplay=0&origin=http://example.com"
+                    frameborder="0"></iframe>
+                </div>
             </article>
         </main>
     </body>

@@ -47,3 +47,9 @@ figcaption {
     max-height: auto;
     margin: auto;
   }
+
+iframe {
+    margin: auto;
+    display: block;
+    border-style:none;
+}
