@@ -49,7 +49,7 @@
                     to stretch the duty cycle just to test things for now. Those parts will be replaced when they come in the mail. 
                 </p>
                 <div class="img-div">
-                    <img class="image" src="Images\555TimerAstable.png" alt="555 Timer in Astable Mode">
+                    <img class="image" src="Images\555TimerAstableLabeled.png" alt="555 Timer in Astable Mode">
                 </div>
                 <p>It's pretty neat how this works. The 555 timer output being on or off depends on the voltage of the capacitor and the capacitor charges
                     and discharges depending on the state of the 555 timers S/R latch. When the capacitor is below 1.67v the S/R latch is 'set' the red LED 
@@ -104,7 +104,7 @@
                     The last two posts were about building clock modes that allow us to advance a program in two different ways. The CPU can't run in both
                     modes at the same time, so both timer circuits can't be allowed to output pulses simultaniously. We need a way to switch between modes.
                     There's actually a few ways to do this but following along with Ben Eater's series lets us use the 555 timer again in its third mode: 
-                    bistable. Bistable essentially means that the output is stable to two modes: stabe on / stable off, or stable output A / stable outputB
+                    bistable. Bistable essentially means that the output is stable to two modes: stable on / stable off, or stable output A / stable outputB
                     ...etc. This is perfect because we want this bistable circuit to throughput the pulse from either the astable circuit, or the monostable 
                     circuit but not both. Our bistable circuit is the chip and LED located at the bottom. I didn't have a push button switch like in the 
                     instructions, but I did have a two way switch on hand that I pilfered from some other parts box. This should be fine becuase we're using 
@@ -130,15 +130,15 @@
                     For the clock to be complete, we needed a way to have both clock pulses linked to the same output, but only allow one or the other to be
                     providing the final output at any given time. The way to to do this was to use AND gates, OR gates, and NOT gates to build logic to
                     provide the output while also preventing overlap. The integrated circuits used in this section were the 74LS04 (NOT gates),
-                    74LS08 (AND gates), and the 74LS32 (OR gates). It was really difficult to try and get all three chip ID's visible in one picture, but
+                    74LS08 (AND gates), and the 74LS32 (OR gates). It was really difficult to try and get all three chip IDs visible in one picture, but
                     each can be seen in the shot below.
                 </p>
                 <div class="img-div">
                     <img class="image" src="Images\ClockLogicCloseUp.png" alt="Clock logic">
                 </div>
                 <p>
-                    The completed clock module is below. Red led is the astable output indicator, left yellow led indicates monostable output.
-                    the right yellow LED indicates the status of the bistable switch: on is astable out, and off is monostable out. The blue 
+                    The completed clock module is below. The red led is the astable output indicator, left yellow led indicates monostable output.
+                    The right yellow LED indicates the status of the bistable switch: on is astable out, and off is monostable out. The blue 
                     led shows the final clock output to the rest of the system.
                 </p>
                 <div class="img-div">

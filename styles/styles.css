@@ -51,5 +51,7 @@ figcaption {
 iframe {
     margin: auto;
     display: block;
+    max-width: 100%;
+    max-height: auto;
     border-style:none;
 }
